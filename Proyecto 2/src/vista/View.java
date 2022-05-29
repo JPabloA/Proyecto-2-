@@ -1,21 +1,27 @@
-package View;
+package vista;
 
+import modelo.Personaje;
+import modelo.Jugador;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 public class View {
-    private JFrame ventana;
-    private JPanel matriz;
+    public JFrame ventana;
+    public JPanel matriz;
     private JPanel panelBoton;
     private static Color colorFondo = new java.awt.Color(160,160,160);
     public static Color colorTablero = new java.awt.Color(0,102,102);
-    public static JButton tablero[][] = new JButton[40][40];
+    public static JLabel tablero[][] = new JLabel[40][40];
     
     public View(){
         ventana = new JFrame("Proyecto 2");
@@ -31,21 +37,34 @@ public class View {
     }
     
     private void crearTablero(){
+        
+        Border BevelRaised = BorderFactory.createBevelBorder(BevelBorder.RAISED);
+        
         for (int fila = 0; fila < 40; fila++ ){
             for (int columna = 0; columna < 40; columna++){
-                tablero[fila][columna] = new JButton();
+                tablero[fila][columna] = new JLabel();
+                tablero[fila][columna].setBorder(BevelRaised);
                 tablero[fila][columna].setBounds(10,15,400,400);
-                tablero[fila][columna].setBorderPainted(true); // Cambiar luego
+                tablero[fila][columna].setOpaque(true);
                 tablero[fila][columna].setBackground(colorTablero);
                 matriz.add(tablero[fila][columna]);
                 matriz.setVisible(true);
             }
         }
         ventana.setBounds(250, 20, 900, 800);
-        matriz.setBounds(300, 300, 600, 720);
-        matriz.setBorder(new LineBorder(Color.BLACK));
+        //matriz.setBounds(300, 300, 600, 720);
+        //matriz.setBorder(new LineBorder(Color.BLACK));
         ventana.setVisible(true);
         panelBoton.setLayout(new GridLayout(1, 1));
         ventana.add(panelBoton, BorderLayout.SOUTH);
+    }
+    
+    // Todo esta en estatico (Creo que no deberia de ser asi)
+    public static void pintarPersonaje(Personaje personaje){
+         View.tablero[personaje.fila][personaje.columna].setBackground(personaje.color);
+    }
+    
+    public static void pintarJugador(Jugador jugador){
+        View.tablero[jugador.fila][jugador.columna].setBackground(jugador.color);
     }
 }

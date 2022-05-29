@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/Model/Jugador.java</file>
-            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/Controller/Controller.java</file>
-            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/Model/Aliado.java</file>
-            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/Model/Enemigo.java</file>
+            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/modelo/Model.java</file>
+            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/modelo/Jugador.java</file>
+            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/vista/View.java</file>
+            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/modelo/Aliado.java</file>
+            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/modelo/Enemigo.java</file>
             <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/Main.java</file>
-            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/View/View.java</file>
-            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/Model/Factory.java</file>
+            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/controlador/Controller.java</file>
+            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/modelo/Factory.java</file>
+            <file>file:/C:/Users/josep/OneDrive%20-%20Estudiantes%20ITCR/Escritorio/TEC/2°%20Año/Primer%20semestre/POO/Proyectos/Proyecto%202/Proyecto%202/src/modelo/Personaje.java</file>
         </group>
     </open-files>
 </project-private>

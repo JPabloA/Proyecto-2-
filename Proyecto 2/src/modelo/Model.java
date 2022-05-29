@@ -1,22 +1,30 @@
-package Controller;
 
-import View.*;
-import Model.*;
+package modelo;
 
-public class Controller {
+import vista.View;
+
+public class Model {
+    public Jugador jugador;
     
     
-    public Controller(){
-        View juego = new View();
-        Jugador jugador = new Jugador();
-        Enemigo enemigo1 = new Enemigo();
+    public Model(){
+
+    jugador = new Jugador();
+    Enemigo enemigo1 = new Enemigo();
+    Aliado aliado1 = new Aliado();
+        
+    View.pintarJugador(jugador);
+    View.pintarPersonaje(enemigo1);
+    View.pintarPersonaje(aliado1);
+    
+    
     }
     
     public static int[] coordenadasVacias(){
-        int fila;
-        int columna;
-        int[] resultado; 
-        resultado = new int[2];
+    int fila;
+    int columna;
+    int[] resultado; 
+    resultado = new int[2];
         
         while(true){
             fila = (int)(Math.random()*(40-1) + 1);
