@@ -1,12 +1,10 @@
 package vista;
 
-import modelo.Personaje;
-import modelo.Jugador;
+import modelo.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -60,10 +58,17 @@ public class View {
     }
     
     // Todo esta en estatico (Creo que no deberia de ser asi)
-    public static void pintarPersonaje(Personaje personaje){
-         View.tablero[personaje.fila][personaje.columna].setBackground(personaje.color);
-    }
+    public static void pintarPersonaje(){
+            
+        for (Personaje personaje: Model.listaNPCs){
+            if (personaje != null){
+                if (personaje.visible){
+                View.tablero[personaje.fila][personaje.columna].setBackground(personaje.color);
+                }
+            }
+        }
     
+    }
     public static void pintarJugador(Jugador jugador){
         View.tablero[jugador.fila][jugador.columna].setBackground(jugador.color);
     }

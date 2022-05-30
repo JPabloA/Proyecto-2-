@@ -2,22 +2,36 @@
 package modelo;
 
 import vista.View;
+import modelo.Factory;
 
 public class Model {
     public Jugador jugador;
+    public static Personaje[] listaNPCs; 
     
     
     public Model(){
-
-    jugador = new Jugador();
-    Enemigo enemigo1 = new Enemigo();
-    Aliado aliado1 = new Aliado();
-        
+    
+    listaNPCs = new Personaje[16];
+    iniciarJuego();
     View.pintarJugador(jugador);
-    View.pintarPersonaje(enemigo1);
-    View.pintarPersonaje(aliado1);
+    View.pintarPersonaje();
+    }
     
-    
+    public void iniciarJuego(){
+        jugador = new Jugador();
+        
+        // Enemigos
+        for (int i = 0; i < 10; i++ ){
+            
+            Factory NPC = new Factory();
+            
+            if (i < 5){
+                listaNPCs[i] = NPC.crearPersonaje(1);
+            }
+            else{
+                listaNPCs[i] = NPC.crearPersonaje(2);
+            }
+        }
     }
     
     public static int[] coordenadasVacias(){
@@ -80,6 +94,33 @@ public class Model {
                 }
                 break;
         }
+        return false;
+    }
+    
+    public static void crearNuevoEnemigo(){
+        
+        int posicion = 0;
+        
+        for (Personaje personaje: listaNPCs){
+            
+            if (personaje != null){
+                posicion ++;
+            }
+        }
+        
+        Factory NPC = new Factory();
+        listaNPCs[posicion] = NPC.crearPersonaje(2);
+    }
+    
+    public static boolean listaConEspacio(){
+
+        for (Personaje personaje: listaNPCs){
+            
+            if (personaje == null){
+                return true;
+            }
+        }
+        
         return false;
     }
 }

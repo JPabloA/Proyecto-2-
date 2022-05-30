@@ -8,7 +8,7 @@ import vista.*;
 import modelo.*;
 
 public class Controller {
-    private int contadorTurnos;
+    private int contadorTurnos = 0; // Analizar si debe ir en el constructor
     private View view;
     private Model model;
     
@@ -35,6 +35,7 @@ public class Controller {
                             model.jugador.fila += 1;
                             vista.View.pintarJugador(model.jugador);
                         }   
+                        model.jugador.direccion = "Abajo"; // Simplemente para que quede viendo hacia esa direccion (Como se hacia en juegos antiguos)
                         break;
                     case KeyEvent.VK_RIGHT:
                         if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 2)){
@@ -43,6 +44,7 @@ public class Controller {
                             model.jugador.columna += 1;
                             vista.View.pintarJugador(model.jugador);
                         }   
+                        model.jugador.direccion = "Derecha"; // Simplemente para que quede viendo hacia esa direccion (Como se hacia en juegos antiguos)
                         break;
                     case KeyEvent.VK_LEFT:
                         if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 3)){
@@ -51,6 +53,7 @@ public class Controller {
                             model.jugador.columna -= 1;
                             vista.View.pintarJugador(model.jugador);
                         }
+                        model.jugador.direccion = "Izquierda"; // Simplemente para que quede viendo hacia esa direccion (Como se hacia en juegos antiguos)
                         break;
                     case KeyEvent.VK_UP:
                         if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 1)){
@@ -59,7 +62,15 @@ public class Controller {
                             model.jugador.fila -= 1;
                             vista.View.pintarJugador(model.jugador);
                         }
+                        model.jugador.direccion = "Arriba";
                         break;
+                }
+                
+                if (Model.listaConEspacio()){
+                    if (contadorTurnos % 15 == 0){
+                        Model.crearNuevoEnemigo();
+                        View.pintarPersonaje();
+                    }
                 }
             }
                 

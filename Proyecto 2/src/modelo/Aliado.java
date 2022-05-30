@@ -5,9 +5,9 @@ import controlador.Controller;
 import java.awt.Color;
 
 public class Aliado extends Personaje{
-    boolean visible;
     
     public Aliado(){
+        visible = true; // MODIFICAR EN EL FUTURO
         int[] coordenadas = Model.coordenadasVacias();
         fila = coordenadas[0];
         columna = coordenadas[1];
