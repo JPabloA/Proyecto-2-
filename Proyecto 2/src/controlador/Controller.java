@@ -23,42 +23,48 @@ public class Controller {
         KeyListener eventoTeclado = new KeyListener() {
             
             @Override
-            public void keyTyped(KeyEvent e) {
-            }
+            public void keyTyped(KeyEvent e) {}
                 
-
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getExtendedKeyCode() == KeyEvent.VK_DOWN){
-                    contadorTurnos ++;
-                    vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
-                    model.jugador.fila += 1;
-                    vista.View.pintarJugador(model.jugador);
-                }
-                else if (e.getExtendedKeyCode() == KeyEvent.VK_RIGHT){
-                    contadorTurnos ++;
-                    vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
-                    model.jugador.columna += 1;
-                    vista.View.pintarJugador(model.jugador);
-                }
-                else if (e.getExtendedKeyCode() == KeyEvent.VK_LEFT){
-                    contadorTurnos ++;
-                    vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
-                    model.jugador.columna -= 1;
-                    vista.View.pintarJugador(model.jugador);
-                }
-                else if (e.getExtendedKeyCode() == KeyEvent.VK_UP){
-                    contadorTurnos ++;
-                    vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
-                    model.jugador.fila -= 1;
-                    vista.View.pintarJugador(model.jugador);
+                switch (e.getExtendedKeyCode()) {
+                    case KeyEvent.VK_DOWN:
+                        if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 4)){
+                            contadorTurnos ++;
+                            vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
+                            model.jugador.fila += 1;
+                            vista.View.pintarJugador(model.jugador);
+                        }   
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 2)){
+                            contadorTurnos ++;
+                            vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
+                            model.jugador.columna += 1;
+                            vista.View.pintarJugador(model.jugador);
+                        }   
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 3)){
+                            contadorTurnos ++;
+                            vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
+                            model.jugador.columna -= 1;
+                            vista.View.pintarJugador(model.jugador);
+                        }
+                        break;
+                    case KeyEvent.VK_UP:
+                        if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 1)){
+                            contadorTurnos ++;
+                            vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
+                            model.jugador.fila -= 1;
+                            vista.View.pintarJugador(model.jugador);
+                        }
+                        break;
                 }
             }
                 
-
             @Override
-            public void keyReleased(KeyEvent e) { 
-            }
+            public void keyReleased(KeyEvent e) {}
         };
         view.ventana.addKeyListener(eventoTeclado);
     } 

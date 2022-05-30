@@ -37,4 +37,49 @@ public class Model {
             }
         }
     }
+    
+    public static boolean siguienteCasillaVacia(int fila, int columna, int direccion){
+       
+        // Arriba: 1
+        // Derecha: 2
+        // Izquierda: 3
+        // Abajo: 4
+        
+        switch (direccion){
+        
+            case 1:
+                if (fila != 0){
+                    if (View.tablero[fila-1][columna].getBackground().equals(View.colorTablero)){
+                        return true;
+                    }
+                }
+                break;
+                 
+            
+            case 2:
+                if (columna != 39){
+                    if (View.tablero[fila][columna+1].getBackground().equals(View.colorTablero)){
+                        return true;
+                    }
+                }
+                break;
+            
+            case 3:
+                if (columna != 0){
+                    if (View.tablero[fila][columna-1].getBackground().equals(View.colorTablero)){
+                        return true;
+                    }
+                }
+                break;
+            
+            case 4:
+                if (fila != 39){
+                    if (View.tablero[fila+1][columna].getBackground().equals(View.colorTablero)){
+                        return true;
+                    }
+                }
+                break;
+        }
+        return false;
+    }
 }
