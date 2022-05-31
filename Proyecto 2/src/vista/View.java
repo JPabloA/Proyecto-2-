@@ -18,8 +18,8 @@ public class View {
     public JPanel matriz;
     private JPanel panelBoton;
     private static Color colorFondo = new java.awt.Color(160,160,160);
-    public static Color colorTablero = new java.awt.Color(0,102,102);
-    public static JLabel tablero[][] = new JLabel[40][40];
+    public Color colorTablero = new java.awt.Color(0,102,102);
+    public JLabel tablero[][] = new JLabel[40][40];
     
     public View(){
         ventana = new JFrame("Proyecto 2");
@@ -58,18 +58,18 @@ public class View {
     }
     
     // Todo esta en estatico (Creo que no deberia de ser asi)
-    public static void pintarPersonaje(){
+    public void pintarPersonaje(Model model){
             
-        for (Personaje personaje: Model.listaNPCs){
+        for (Personaje personaje: model.listaNPCs){
             if (personaje != null){
                 if (personaje.visible){
-                View.tablero[personaje.fila][personaje.columna].setBackground(personaje.color);
+                    tablero[personaje.fila][personaje.columna].setBackground(personaje.color);
                 }
             }
         }
     
     }
-    public static void pintarJugador(Jugador jugador){
-        View.tablero[jugador.fila][jugador.columna].setBackground(jugador.color);
+    public void pintarJugador(Jugador jugador){
+        tablero[jugador.fila][jugador.columna].setBackground(jugador.color);
     }
 }
