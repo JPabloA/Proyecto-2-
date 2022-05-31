@@ -2,8 +2,6 @@ package controlador;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-import javax.swing.JButton; // Quitar
-import javax.swing.JPanel;
 import vista.*;
 import modelo.*;
 
@@ -77,16 +75,20 @@ public class Controller {
                 
                 if (flagMovimiento){
                     model.moverHaciaPersonaje(view);
+                    model.rangoVisibilidad();
                     if (model.listaConEspacio()){
-                        if (contadorTurnos % 15 == 0){
+                        if (model.cantidadAliados() < 6){
+                            if (contadorTurnos % 10 == 0){
+                                model.crearNuevoAliado();
+                            }
+                        }
+                        if (contadorTurnos % 20 == 0){
                             model.crearNuevoEnemigo();
                         }
                     }
                     view.pintarPersonaje(model);
                     view.pintarJugador(model.jugador);
-
                 }
-
             }
                 
             @Override

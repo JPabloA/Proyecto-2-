@@ -34,6 +34,7 @@ public class Model {
                 listaNPCs[i] = NPC.crearPersonaje(coordenadas[0], coordenadas[1],2);
             }
         }
+        printLista();
     }
     
     public int[] coordenadasVacias(){
@@ -98,8 +99,8 @@ public class Model {
         }
         return false;
     }
-
-    public boolean siguienteCasillaVaciaoJugador(int fila, int columna, int direccion, View vista){
+    
+        public boolean siguienteCasillaVaciaOJugador(int fila, int columna, int direccion, View vista){
        
         // Arriba: 1
         // Derecha: 2
@@ -144,7 +145,6 @@ public class Model {
         return false;
     }
     
-    
     public void atacar(View vista){
     
         if (null != jugador.direccion)switch (jugador.direccion) {
@@ -176,10 +176,10 @@ public class Model {
         for (Personaje personaje: listaNPCs){
             if (personaje != null){
                 if (personaje instanceof Enemigo){
-                    if(personaje.fila == fila && personaje.columna == columna){
-                    vista.tablero[personaje.fila][personaje.columna].setBackground(vista.colorTablero);
-                    personaje = null;
-                    listaNPCs[posicion] = null;
+                    if (personaje.fila == fila && personaje.columna == columna){
+                        vista.tablero[personaje.fila][personaje.columna].setBackground(vista.colorTablero);
+                        personaje = null;
+                        listaNPCs[posicion] = null;
                     }
                 }
             }
@@ -226,6 +226,37 @@ public class Model {
         listaNPCs[posicion] = NPC.crearPersonaje(coordenadas[0], coordenadas[1],2);
     }
     
+    public void crearNuevoAliado(){
+        
+        int posicion = 0;
+        
+        for (Personaje personaje: listaNPCs){
+            
+            if (personaje == null){
+                break;
+            }
+            posicion++;
+        }
+        
+        Factory NPC = new Factory();
+        int[] coordenadas;
+        coordenadas = coordenadasVacias();
+        
+        listaNPCs[posicion] = NPC.crearPersonaje(coordenadas[0], coordenadas[1],1);
+    }
+    
+    public int cantidadAliados(){
+        int cantidad = 0;
+        
+        for (Personaje personaje: listaNPCs){
+            
+            if (personaje instanceof Aliado){
+               cantidad++;
+            }
+        }
+        return cantidad;
+    }
+    
     public boolean listaConEspacio(){
 
         for (Personaje personaje: listaNPCs){
@@ -234,10 +265,9 @@ public class Model {
                 return true;
             }
         }
-        
         return false;
     }
-
+    
     public void moverHaciaPersonaje(View vista){
 
         int cont = 0;
@@ -260,16 +290,12 @@ public class Model {
                     else if (enemigo.columna > jugador.columna){
                         moverEnemigo("left", enemigo.fila, enemigo.columna, vista, enemigo);
                     }
-                    else if (enemigo.columna == jugador.columna && enemigo.fila == jugador.fila){
+                    if (enemigo.columna == jugador.columna && enemigo.fila == jugador.fila){ 
                         vista.tablero[enemigo.fila][enemigo.columna].setBackground(vista.colorTablero);
                         enemigo = null;
                         listaNPCs[cont] = null;
-
                     }
-
                 }
-                
-
             }
         cont ++;
         }
@@ -280,35 +306,41 @@ public class Model {
         switch (direccion){
 
             case "up":
-                if(siguienteCasillaVaciaoJugador(enemigo.fila, enemigo.columna, 1, vista)){
+                if(siguienteCasillaVaciaOJugador(enemigo.fila, enemigo.columna, 1, vista)){
                     vista.tablero[enemigo.fila][enemigo.columna].setBackground(vista.colorTablero);
                     enemigo.fila -= 1;
-                    
                 }
                 break;
             case "down":
-                if(siguienteCasillaVaciaoJugador(enemigo.fila, enemigo.columna, 4, vista)){
+                if(siguienteCasillaVaciaOJugador(enemigo.fila, enemigo.columna, 4, vista)){
                     vista.tablero[enemigo.fila][enemigo.columna].setBackground(vista.colorTablero);
-                    enemigo.fila += 1;
-                    
+                    enemigo.fila += 1; 
                 }
                 break;
             case "right":
-                if(siguienteCasillaVaciaoJugador(enemigo.fila, enemigo.columna, 2, vista)){
+                if(siguienteCasillaVaciaOJugador(enemigo.fila, enemigo.columna, 2, vista)){
                     vista.tablero[enemigo.fila][enemigo.columna].setBackground(vista.colorTablero);
-                    enemigo.columna += 1;
-                    
+                    enemigo.columna += 1;     
                 }
                 break;
             case "left":
-                if(siguienteCasillaVaciaoJugador(enemigo.fila, enemigo.columna, 3, vista)){
+                if(siguienteCasillaVaciaOJugador(enemigo.fila, enemigo.columna, 3, vista)){
                     vista.tablero[enemigo.fila][enemigo.columna].setBackground(vista.colorTablero);
                     enemigo.columna -= 1;
                 }
                 break;
-    
         }
-
     }
-
+    
+    public void rangoVisibilidad(){
+    
+        for (Personaje personaje: listaNPCs){
+            if (personaje != null){
+                if (personaje instanceof Aliado){
+                    personaje.visible = (jugador.fila > personaje.fila - 4 && jugador.fila < personaje.fila + 4) && (jugador.columna > personaje.columna - 4 && jugador.columna < personaje.columna + 4);
+                }
+            }
+        }
+    }
+    
 }

@@ -16,5 +16,5 @@ public class Jugador {
         color = new Color(204, 204, 255);
         direccion = "Derecha";
     }
-    
+
 }
