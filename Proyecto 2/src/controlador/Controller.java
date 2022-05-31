@@ -16,62 +16,77 @@ public class Controller {
     public Controller(View view, Model model){
         this.view = view;
         this.model = model;
+        view.pintarJugador(model.jugador);
+        view.pintarPersonaje(model);
         moverPersonaje();
+        atacarEnemigo();
     }
     
     private void moverPersonaje(){
         KeyListener eventoTeclado = new KeyListener() {
-            
+ 
             @Override
             public void keyTyped(KeyEvent e) {}
                 
             @Override
             public void keyPressed(KeyEvent e) {
+                boolean flagMovimiento = false;
+                
                 switch (e.getExtendedKeyCode()) {
                     case KeyEvent.VK_DOWN:
-                        if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 4)){
+                        if (model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 4, view)){
                             contadorTurnos ++;
-                            vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
+                            view.tablero[model.jugador.fila][model.jugador.columna].setBackground(view.colorTablero);// Despintar Jugador (QUITAR LUEGO)
                             model.jugador.fila += 1;
-                            vista.View.pintarJugador(model.jugador);
+                            view.pintarJugador(model.jugador);
+                            flagMovimiento = true;
                         }   
                         model.jugador.direccion = "Abajo"; // Simplemente para que quede viendo hacia esa direccion (Como se hacia en juegos antiguos)
                         break;
                     case KeyEvent.VK_RIGHT:
-                        if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 2)){
+                        if (model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 2, view)){
                             contadorTurnos ++;
-                            vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
+                            view.tablero[model.jugador.fila][model.jugador.columna].setBackground(view.colorTablero);// Despintar Jugador (QUITAR LUEGO)
                             model.jugador.columna += 1;
-                            vista.View.pintarJugador(model.jugador);
+                            view.pintarJugador(model.jugador);
+                            flagMovimiento = true;
                         }   
                         model.jugador.direccion = "Derecha"; // Simplemente para que quede viendo hacia esa direccion (Como se hacia en juegos antiguos)
                         break;
                     case KeyEvent.VK_LEFT:
-                        if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 3)){
+                        if (model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 3, view)){
                             contadorTurnos ++;
-                            vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
+                            view.tablero[model.jugador.fila][model.jugador.columna].setBackground(view.colorTablero);// Despintar Jugador (QUITAR LUEGO)
                             model.jugador.columna -= 1;
-                            vista.View.pintarJugador(model.jugador);
+                            view.pintarJugador(model.jugador);
+                            flagMovimiento = true;
                         }
                         model.jugador.direccion = "Izquierda"; // Simplemente para que quede viendo hacia esa direccion (Como se hacia en juegos antiguos)
                         break;
                     case KeyEvent.VK_UP:
-                        if (Model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 1)){
+                        if (model.siguienteCasillaVacia(model.jugador.fila, model.jugador.columna, 1, view)){
                             contadorTurnos ++;
-                            vista.View.tablero[model.jugador.fila][model.jugador.columna].setBackground(View.colorTablero);// Despintar Jugador (QUITAR LUEGO)
+                            view.tablero[model.jugador.fila][model.jugador.columna].setBackground(view.colorTablero);// Despintar Jugador (QUITAR LUEGO)
                             model.jugador.fila -= 1;
-                            vista.View.pintarJugador(model.jugador);
+                            view.pintarJugador(model.jugador);
+                            flagMovimiento = true;
                         }
                         model.jugador.direccion = "Arriba";
-                        break;
+                        break;   
                 }
                 
-                if (Model.listaConEspacio()){
-                    if (contadorTurnos % 15 == 0){
-                        Model.crearNuevoEnemigo();
-                        View.pintarPersonaje();
+                if (flagMovimiento){
+                    model.moverHaciaPersonaje(view);
+                    if (model.listaConEspacio()){
+                        if (contadorTurnos % 15 == 0){
+                            model.crearNuevoEnemigo();
+                        }
                     }
+                    view.pintarPersonaje(model);
+                    view.pintarJugador(model.jugador);
+
                 }
+
             }
                 
             @Override
@@ -79,5 +94,25 @@ public class Controller {
         };
         view.ventana.addKeyListener(eventoTeclado);
     } 
+    
+    private void atacarEnemigo(){
+        
+        KeyListener eventoTeclado = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getExtendedKeyCode() == KeyEvent.VK_SPACE){
+                        model.atacar(view);
+                }
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        };
+
+        view.ventana.addKeyListener(eventoTeclado);
+    }
 }
 
