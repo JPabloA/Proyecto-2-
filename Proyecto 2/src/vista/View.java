@@ -72,4 +72,8 @@ public class View {
     public void pintarJugador(Jugador jugador){
         tablero[jugador.fila][jugador.columna].setBackground(jugador.color);
     }
+
+    public void pintarEnemigo(Personaje enemigo){
+        tablero[enemigo.fila][enemigo.columna].setBackground(enemigo.color);
+    }
 }

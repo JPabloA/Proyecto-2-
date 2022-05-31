@@ -76,13 +76,17 @@ public class Controller {
                 }
                 
                 if (flagMovimiento){
+                    model.moverHaciaPersonaje(view);
                     if (model.listaConEspacio()){
                         if (contadorTurnos % 15 == 0){
                             model.crearNuevoEnemigo();
-                            view.pintarPersonaje(model);
                         }
                     }
+                    view.pintarPersonaje(model);
+                    view.pintarJugador(model.jugador);
+
                 }
+
             }
                 
             @Override
