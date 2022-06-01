@@ -2,6 +2,7 @@
 package modelo;
 
 import java.awt.Color;
+import vista.View;
 
 public class Personaje {
     public int fila;
@@ -10,6 +11,10 @@ public class Personaje {
     public boolean visible;
     
     public Personaje(){}
+
+    public void moverNPC(String direccion,  View vista, Model model){
+
+    }
 }
 
 

@@ -74,7 +74,7 @@ public class Controller {
                 }
                 
                 if (flagMovimiento){
-                    model.moverHaciaPersonaje(view);
+                    model.moverHaciaPersonaje(view,model);
                     model.rangoVisibilidad();
                     if (model.listaConEspacio()){
                         if (model.cantidadAliados() < 6){

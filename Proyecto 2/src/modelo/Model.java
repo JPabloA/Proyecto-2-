@@ -100,50 +100,50 @@ public class Model {
         return false;
     }
     
-        public boolean siguienteCasillaVaciaOJugador(int fila, int columna, int direccion, View vista){
-       
+    public boolean siguienteCasillaVaciaOJugador(int fila, int columna, int direccion, View vista){
+
         // Arriba: 1
         // Derecha: 2
         // Izquierda: 3
         // Abajo: 4
-        
-        switch (direccion){
-        
-            case 1:
-                if (fila != 0){
-                    if (vista.tablero[fila-1][columna].getBackground().equals(vista.colorTablero) || vista.tablero[fila-1][columna].getBackground().equals(jugador.color)){
-                        return true;
-                    }
-                }
-                break;
-                 
             
-            case 2:
-                if (columna != 39){
-                    if (vista.tablero[fila][columna+1].getBackground().equals(vista.colorTablero) || vista.tablero[fila][columna+1].getBackground().equals(jugador.color)){
-                        return true;
-                    }
-                }
-                break;
+            switch (direccion){
             
-            case 3:
-                if (columna != 0){
-                    if (vista.tablero[fila][columna-1].getBackground().equals(vista.colorTablero) || vista.tablero[fila][columna-1].getBackground().equals(jugador.color)){
-                        return true;
+                case 1:
+                    if (fila != 0){
+                        if (vista.tablero[fila-1][columna].getBackground().equals(vista.colorTablero) || vista.tablero[fila-1][columna].getBackground().equals(jugador.color)){
+                            return true;
+                        }
                     }
-                }
-                break;
-            
-            case 4:
-                if (fila != 39){
-                    if (vista.tablero[fila+1][columna].getBackground().equals(vista.colorTablero) || vista.tablero[fila+1][columna].getBackground().equals(jugador.color)){
-                        return true;
+                    break;
+                     
+                
+                case 2:
+                    if (columna != 39){
+                        if (vista.tablero[fila][columna+1].getBackground().equals(vista.colorTablero) || vista.tablero[fila][columna+1].getBackground().equals(jugador.color)){
+                            return true;
+                        }
                     }
-                }
-                break;
-        }
-        return false;
-    }
+                    break;
+                
+                case 3:
+                    if (columna != 0){
+                        if (vista.tablero[fila][columna-1].getBackground().equals(vista.colorTablero) || vista.tablero[fila][columna-1].getBackground().equals(jugador.color)){
+                            return true;
+                        }
+                    }
+                    break;
+                
+                case 4:
+                    if (fila != 39){
+                        if (vista.tablero[fila+1][columna].getBackground().equals(vista.colorTablero) || vista.tablero[fila+1][columna].getBackground().equals(jugador.color)){
+                            return true;
+                        }
+                    }
+                    break;
+            }
+            return false;
+        }    
     
     public void atacar(View vista){
     
@@ -268,7 +268,7 @@ public class Model {
         return false;
     }
     
-    public void moverHaciaPersonaje(View vista){
+    public void moverHaciaPersonaje(View vista, Model model){
 
         int cont = 0;
 
@@ -277,18 +277,18 @@ public class Model {
                 if (enemigo instanceof Enemigo){
                     
                     if (enemigo.fila < jugador.fila){
-                        moverEnemigo("down", enemigo.fila, enemigo.columna, vista, enemigo);
+                        enemigo.moverNPC("down", vista, model);
                     }
                     else if (enemigo.fila > jugador.fila){
-                        moverEnemigo("up", enemigo.fila, enemigo.columna, vista, enemigo);
+                        enemigo.moverNPC("up", vista, model);
 
                     }
                     else if (enemigo.columna < jugador.columna){
-                        moverEnemigo("right", enemigo.fila, enemigo.columna, vista, enemigo);
+                        enemigo.moverNPC("right",  vista,model);
 
                     }
                     else if (enemigo.columna > jugador.columna){
-                        moverEnemigo("left", enemigo.fila, enemigo.columna, vista, enemigo);
+                        enemigo.moverNPC("left",  vista, model);
                     }
                     if (enemigo.columna == jugador.columna && enemigo.fila == jugador.fila){ 
                         vista.tablero[enemigo.fila][enemigo.columna].setBackground(vista.colorTablero);
@@ -301,37 +301,6 @@ public class Model {
         }
     }
 
-    public void moverEnemigo(String direccion, int fila, int columna, View vista, Personaje enemigo){
-
-        switch (direccion){
-
-            case "up":
-                if(siguienteCasillaVaciaOJugador(enemigo.fila, enemigo.columna, 1, vista)){
-                    vista.tablero[enemigo.fila][enemigo.columna].setBackground(vista.colorTablero);
-                    enemigo.fila -= 1;
-                }
-                break;
-            case "down":
-                if(siguienteCasillaVaciaOJugador(enemigo.fila, enemigo.columna, 4, vista)){
-                    vista.tablero[enemigo.fila][enemigo.columna].setBackground(vista.colorTablero);
-                    enemigo.fila += 1; 
-                }
-                break;
-            case "right":
-                if(siguienteCasillaVaciaOJugador(enemigo.fila, enemigo.columna, 2, vista)){
-                    vista.tablero[enemigo.fila][enemigo.columna].setBackground(vista.colorTablero);
-                    enemigo.columna += 1;     
-                }
-                break;
-            case "left":
-                if(siguienteCasillaVaciaOJugador(enemigo.fila, enemigo.columna, 3, vista)){
-                    vista.tablero[enemigo.fila][enemigo.columna].setBackground(vista.colorTablero);
-                    enemigo.columna -= 1;
-                }
-                break;
-        }
-    }
-    
     public void rangoVisibilidad(){
     
         for (Personaje personaje: listaNPCs){
