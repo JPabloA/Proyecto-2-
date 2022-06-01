@@ -1,7 +1,7 @@
 package modelo;
 
 import java.awt.Color;
-import vista.*;
+import vista.View;
 
 public class Enemigo extends Personaje{
     public Enemigo(int fila, int columna){
@@ -10,8 +10,9 @@ public class Enemigo extends Personaje{
         this.columna = columna;
         color = new Color(153,0,76);
     }
-    //mod
-    @Override
+    
+    
+     @Override
     public void moverNPC(String direccion, View vista, Model model) {
         switch (direccion){
 
@@ -45,6 +46,4 @@ public class Enemigo extends Personaje{
                 break;
         }
     }
-
-    
 }

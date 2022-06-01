@@ -102,48 +102,48 @@ public class Model {
     
     public boolean siguienteCasillaVaciaOJugador(int fila, int columna, int direccion, View vista){
 
-        // Arriba: 1
-        // Derecha: 2
-        // Izquierda: 3
-        // Abajo: 4
+    // Arriba: 1
+    // Derecha: 2
+    // Izquierda: 3
+    // Abajo: 4
+        
+        switch (direccion){
+        
+            case 1:
+                if (fila != 0){
+                    if (vista.tablero[fila-1][columna].getBackground().equals(vista.colorTablero) || vista.tablero[fila-1][columna].getBackground().equals(jugador.color)){
+                        return true;
+                    }
+                }
+                break;
+                 
             
-            switch (direccion){
+            case 2:
+                if (columna != 39){
+                    if (vista.tablero[fila][columna+1].getBackground().equals(vista.colorTablero) || vista.tablero[fila][columna+1].getBackground().equals(jugador.color)){
+                        return true;
+                    }
+                }
+                break;
             
-                case 1:
-                    if (fila != 0){
-                        if (vista.tablero[fila-1][columna].getBackground().equals(vista.colorTablero) || vista.tablero[fila-1][columna].getBackground().equals(jugador.color)){
-                            return true;
-                        }
+            case 3:
+                if (columna != 0){
+                    if (vista.tablero[fila][columna-1].getBackground().equals(vista.colorTablero) || vista.tablero[fila][columna-1].getBackground().equals(jugador.color)){
+                        return true;
                     }
-                    break;
-                     
-                
-                case 2:
-                    if (columna != 39){
-                        if (vista.tablero[fila][columna+1].getBackground().equals(vista.colorTablero) || vista.tablero[fila][columna+1].getBackground().equals(jugador.color)){
-                            return true;
-                        }
+                }
+                break;
+            
+            case 4:
+                if (fila != 39){
+                    if (vista.tablero[fila+1][columna].getBackground().equals(vista.colorTablero) || vista.tablero[fila+1][columna].getBackground().equals(jugador.color)){
+                        return true;
                     }
-                    break;
-                
-                case 3:
-                    if (columna != 0){
-                        if (vista.tablero[fila][columna-1].getBackground().equals(vista.colorTablero) || vista.tablero[fila][columna-1].getBackground().equals(jugador.color)){
-                            return true;
-                        }
-                    }
-                    break;
-                
-                case 4:
-                    if (fila != 39){
-                        if (vista.tablero[fila+1][columna].getBackground().equals(vista.colorTablero) || vista.tablero[fila+1][columna].getBackground().equals(jugador.color)){
-                            return true;
-                        }
-                    }
-                    break;
-            }
-            return false;
-        }    
+                }
+                break;
+        }
+        return false;
+    }
     
     public void atacar(View vista){
     
@@ -275,13 +275,11 @@ public class Model {
         for (Personaje enemigo: listaNPCs){
             if (enemigo != null){
                 if (enemigo instanceof Enemigo){
-                    
                     if (enemigo.fila < jugador.fila){
                         enemigo.moverNPC("down", vista, model);
                     }
                     else if (enemigo.fila > jugador.fila){
                         enemigo.moverNPC("up", vista, model);
-
                     }
                     else if (enemigo.columna < jugador.columna){
                         enemigo.moverNPC("right",  vista,model);
@@ -300,13 +298,43 @@ public class Model {
         cont ++;
         }
     }
-
+    
     public void rangoVisibilidad(){
     
         for (Personaje personaje: listaNPCs){
             if (personaje != null){
                 if (personaje instanceof Aliado){
                     personaje.visible = (jugador.fila > personaje.fila - 4 && jugador.fila < personaje.fila + 4) && (jugador.columna > personaje.columna - 4 && jugador.columna < personaje.columna + 4);
+                }
+            }
+        }
+    }
+    
+    // D: Funcion utilizada principalmente para aumentar un poco la dificultad del juego
+    // Lo que hace es que si se entra al rango de vista un aliado y hay una amenaza justamente en la casilla en donde se encuentra el aliado la amenaza mata al aliado.
+    // Se hace esto con la finalidad de que el juego sea un poco mas complicado y tactico.
+    
+    public void enemigoMataAliado(){
+    
+        int posicion;
+        
+        for (Personaje enemigo: listaNPCs){
+            if (enemigo != null){
+                if (enemigo instanceof Enemigo){  
+                    posicion = 0;
+                    for (Personaje aliado: listaNPCs){
+                        if (aliado != null){
+                            if (aliado instanceof Aliado){
+                                if (aliado.visible){
+                                    if (enemigo.fila == aliado.fila  && enemigo.columna == aliado.columna){
+                                        aliado = null;
+                                        listaNPCs[posicion] = null;
+                                    }
+                                }
+                            }
+                        }
+                        posicion++;
+                    }
                 }
             }
         }

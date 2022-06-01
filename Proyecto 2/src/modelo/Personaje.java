@@ -11,10 +11,11 @@ public class Personaje {
     public boolean visible;
     
     public Personaje(){}
-
-    public void moverNPC(String direccion,  View vista, Model model){
-
-    }
+    
+    // Funciones 
+    public void moverNPC(String direccion, View vista, Model model){}
+    
+    
 }
 
 

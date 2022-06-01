@@ -74,8 +74,9 @@ public class Controller {
                 }
                 
                 if (flagMovimiento){
-                    model.moverHaciaPersonaje(view,model);
                     model.rangoVisibilidad();
+                    model.moverHaciaPersonaje(view, model);
+                    model.enemigoMataAliado();
                     if (model.listaConEspacio()){
                         if (model.cantidadAliados() < 6){
                             if (contadorTurnos % 10 == 0){
