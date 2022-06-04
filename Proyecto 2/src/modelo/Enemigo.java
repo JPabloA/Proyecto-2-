@@ -18,32 +18,50 @@ public class Enemigo extends Personaje{
 
             case "up":
                 if(model.siguienteCasillaVaciaOJugador(fila, columna, 1, vista)){
-                    vista.tablero[fila][columna].setBackground(vista.colorTablero);
+                    vista.pintarCasillaBase(fila, columna);
                     fila -= 1;
                     vista.tablero[fila][columna].setBackground(color);
                 }
                 break;
             case "down":
                 if(model.siguienteCasillaVaciaOJugador(fila, columna, 4, vista)){
-                    vista.tablero[fila][columna].setBackground(vista.colorTablero);
+                    vista.pintarCasillaBase(fila, columna);
                     fila += 1; 
                     vista.tablero[fila][columna].setBackground(color);
                 }
                 break;
             case "right":
                 if(model.siguienteCasillaVaciaOJugador(fila, columna, 2, vista)){
-                    vista.tablero[fila][columna].setBackground(vista.colorTablero);
+                    vista.pintarCasillaBase(fila, columna);
                     columna += 1;   
                     vista.tablero[fila][columna].setBackground(color);  
                 }
                 break;
             case "left":
                 if(model.siguienteCasillaVaciaOJugador(fila, columna, 3, vista)){
-                    vista.tablero[fila][columna].setBackground(vista.colorTablero);
+                    vista.pintarCasillaBase(fila, columna);
                     columna -= 1;
                     vista.tablero[fila][columna].setBackground(color);
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void update(Model model, View view) {
+        
+        if (fila < model.jugador.fila){
+            moverNPC("down", view, model);
+        }
+        else if (fila > model.jugador.fila){
+            moverNPC("up", view, model);
+        }
+        else if (columna < model.jugador.columna){
+            moverNPC("right",  view,model);
+
+        }
+        else if (columna > model.jugador.columna){
+            moverNPC("left",  view, model);
         }
     }
 }
