@@ -1,17 +1,26 @@
 
 package modelo;
 
-import controlador.Controller;
 import java.awt.Color;
+import vista.View;
 
 public class Aliado extends Personaje{
     
-    public Aliado(){
-        visible = true; // MODIFICAR EN EL FUTURO
-        int[] coordenadas = Model.coordenadasVacias();
-        fila = coordenadas[0];
-        columna = coordenadas[1];
+    public Aliado(int fila, int columna){
+        visible = false; 
+        this.fila = fila;
+        this.columna = columna;
         color = new Color(0,204,0);
+    }
+    
+    
+    public void rangoVisibilidad(Model model){
+        visible = (model.jugador.fila > fila - 4 && model.jugador.fila < fila + 4) && (model.jugador.columna > columna - 4 && model.jugador.columna < columna + 4);
+    }
+
+    @Override
+    public void update(Model model) {
+        rangoVisibilidad(model);
     }
 
 }
