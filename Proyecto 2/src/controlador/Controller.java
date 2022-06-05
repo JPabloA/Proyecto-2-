@@ -82,7 +82,7 @@ public class Controller {
                                 model.crearNuevoAliado();
                             }
                         }
-                        if (contadorTurnos % 12 == 0){
+                        if (contadorTurnos % 14 == 0){
                             model.crearNuevoEnemigo();
                         }
                     }

@@ -39,18 +39,22 @@ public class Enemigo extends Personaje{
     @Override
     public void update(Model model) {
         
-        if (fila < model.jugador.fila){
-            moverNPC("down", model);
+        int numRand = (int)(Math.random()*(3-1)+1);
+        if (numRand == 1){
+            if (fila < model.jugador.fila){
+                moverNPC("down", model);
+            }
+            else if (fila > model.jugador.fila){
+                moverNPC("up", model);
+            }
         }
-        else if (fila > model.jugador.fila){
-            moverNPC("up", model);
-        }
-        else if (columna < model.jugador.columna){
-            moverNPC("right", model);
-
-        }
-        else if (columna > model.jugador.columna){
-            moverNPC("left", model);
+        else{
+            if (columna < model.jugador.columna){
+                moverNPC("right", model);
+            }
+            else if (columna > model.jugador.columna){
+                moverNPC("left", model);
+            }
         }
     }
 }
