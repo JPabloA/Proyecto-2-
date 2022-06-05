@@ -7,7 +7,7 @@ import vista.*;
 import modelo.*;
 
 public class Controller {
-    private int contadorTurnos = 0; // Analizar si debe ir en el constructor
+    private int contadorTurnos = 0;
     private View view;
     private Model model;
     
@@ -74,8 +74,8 @@ public class Controller {
                     }
 
                     if (flagMovimiento){
-                        model.jugadorEncimaDeAliado(model, view);
-                        model.jugadorEncimaDeEnemigo(model, view);
+                        model.jugadorEncimaDeAliado();
+                        model.jugadorEncimaDeEnemigo();
                         model.enemigoMataAliado();
                         if (model.cantidadAliados() < 6){
                             if (contadorTurnos % 10 == 0){

@@ -1,6 +1,4 @@
-
 package modelo;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +7,6 @@ import vista.View;
 public class Model {
     public Jugador jugador;
     public List<Personaje> listaNPCs; 
-    
     
     public Model(){ 
         listaNPCs = new ArrayList<>();
@@ -39,12 +36,6 @@ public class Model {
                 listaNPCs.add(personajeCreado);
                 jugador.agregarObservador(personajeCreado);
             }
-        }
-    }
-    public void printLista(){
-    
-        for (Personaje NPC: listaNPCs){
-            System.out.println(NPC);
         }
     }
     
@@ -251,7 +242,7 @@ public class Model {
     }
     
     // Regenerar vida de jugador
-    public void jugadorEncimaDeAliado(Model model, View view){
+    public void jugadorEncimaDeAliado(){
         
         for (int i =0; i < listaNPCs.size(); i++){
             Personaje personaje = listaNPCs.get(i);
@@ -259,7 +250,6 @@ public class Model {
                 if (jugador.fila == personaje.fila && jugador.columna == personaje.columna){
                     if (jugador.vida < 9){
                         jugador.aumentarVida();
-                        view.cambiarImagenVida(model.jugador.vida);
                     }
                     listaNPCs.remove(personaje);
                     jugador.eliminarObservador(personaje);
@@ -268,15 +258,13 @@ public class Model {
         }
     }
     
-    public void jugadorEncimaDeEnemigo(Model model, View view){
+    public void jugadorEncimaDeEnemigo(){
         
         for (int i =0; i < listaNPCs.size(); i++){
             Personaje personaje = listaNPCs.get(i);
             if (personaje instanceof Enemigo){
                 if (jugador.fila == personaje.fila && jugador.columna == personaje.columna){
-                    view.pintarCasillaBase(personaje.fila, personaje.columna);
                     jugador.disminuirVida(); // Le quita una vida al jugador
-                    view.cambiarImagenVida(jugador.vida);
                     listaNPCs.remove(personaje);
                     jugador.eliminarObservador(personaje);      
                 } 
@@ -291,8 +279,7 @@ public class Model {
             }
         }
     }
-    
-    
+
     // Quitar vida de jugador
     // D: Funcion utilizada principalmente para aumentar un poco la dificultad del juego
     // Lo que hace es que si se entra al rango de vista un aliado y hay una amenaza justamente en la casilla en donde se encuentra el aliado la amenaza mata al aliado.

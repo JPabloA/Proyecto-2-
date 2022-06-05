@@ -80,6 +80,7 @@ public class View {
                 }
             }
         }
+        cambiarImagenVida(model.jugador.vida);
     
     }
     public void pintarJugador(Jugador jugador){

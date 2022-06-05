@@ -7,6 +7,7 @@ public class Main {
          View view = new View();
          Model mod = new Model();
          
-         Controller simulacion = new Controller(view, mod);  
+         Controller simulacion = new Controller(view, mod);
+         
      }
 }

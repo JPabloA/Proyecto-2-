@@ -13,8 +13,7 @@ public class Personaje implements Observer {
     public Personaje(){}
     
     // Funciones 
-    public void moverNPC(String direccion, Model model){}
-
+    
     @Override
     public void update(Model model) {
     }

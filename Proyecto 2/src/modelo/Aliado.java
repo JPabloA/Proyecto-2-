@@ -1,8 +1,6 @@
-
 package modelo;
 
 import java.awt.Color;
-import vista.View;
 
 public class Aliado extends Personaje{
     

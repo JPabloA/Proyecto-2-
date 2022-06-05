@@ -10,8 +10,6 @@ public class Enemigo extends Personaje{
         color = new Color(153,0,76);
     }
     
-    
-     @Override
     public void moverNPC(String direccion, Model model) {
         switch (direccion){
 
